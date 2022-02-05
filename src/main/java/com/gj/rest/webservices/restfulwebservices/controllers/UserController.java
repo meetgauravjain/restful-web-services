@@ -14,30 +14,33 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    @Autowired
-    private UserDaoService userDaoService;
+  @Autowired private UserDaoService userDaoService;
 
-    @GetMapping(path = "/users")
-    public List<User> getAllUsers(){
+  @GetMapping(path = "/users")
+  public List<User> getAllUsers() {
 
-        return userDaoService.findAll();
+    return userDaoService.findAll();
+  }
+
+  @GetMapping(path = "/users/{id}")
+  public User retrieveUser(@PathVariable int id) {
+
+    User user;
+    user = userDaoService.findOne(id);
+    if (null == user) {
+      throw new UserNotFoundException("id - " + id);
     }
+    return user;
+  }
 
-    @GetMapping(path = "/users/{id}")
-    public User retrieveUser(@PathVariable int id){
-
-        User user =  userDaoService.findOne(id);
-        if (null == user){
-                throw new UserNotFoundException("id - "+ id );
-        }
-        return user;
-    }
-
-    @PostMapping(path = "/users")
-    public ResponseEntity<Object> createUser(@RequestBody User user){
-        User savedUser = userDaoService.save(user);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(savedUser.getId()).toUri();
-        return ResponseEntity.created(location).build();
-    }
+  @PostMapping(path = "/users")
+  public ResponseEntity<Object> createUser(@RequestBody User user) {
+    User savedUser = userDaoService.save(user);
+    URI location =
+        ServletUriComponentsBuilder.fromCurrentRequest()
+            .path("/{id}")
+            .buildAndExpand(savedUser.getId())
+            .toUri();
+    return ResponseEntity.created(location).build();
+  }
 }
