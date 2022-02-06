@@ -8,7 +8,7 @@ public class User {
 
   private Integer id;
 
-  @Size(min = 2)
+  @Size(min = 2, message = "Minimum size of name should be 2")
   private String name;
 
   @Past private Date birthDate;

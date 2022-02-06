@@ -1,7 +1,6 @@
 package com.gj.rest.webservices.restfulwebservices.controllers;
 
 import com.gj.rest.webservices.restfulwebservices.Beans.HelloWorldBean;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
