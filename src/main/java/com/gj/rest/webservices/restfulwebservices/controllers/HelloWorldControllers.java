@@ -6,8 +6,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Locale;
-
 @RestController
 public class HelloWorldControllers {
 
@@ -35,12 +33,13 @@ public class HelloWorldControllers {
 
   @GetMapping(path = "/hello-world-internationalization")
   public String helloWorld5(
-      //@RequestHeader(name = "Accept-Language", required = false) Locale locale)
-  )
-  {
-    return messageSource.getMessage("good.morning.message", null,
-            "Default message",
-    //        locale
-            LocaleContextHolder.getLocale());
+      // @RequestHeader(name = "Accept-Language", required = false) Locale locale)
+      ) {
+    return messageSource.getMessage(
+        "good.morning.message",
+        null,
+        "Default message",
+        //        locale
+        LocaleContextHolder.getLocale());
   }
 }

@@ -1,17 +1,23 @@
 package com.gj.rest.webservices.restfulwebservices.Beans;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
+@Entity
 public class User {
 
-  private Integer id;
+  @Id @GeneratedValue private Integer id;
 
   @Size(min = 2, message = "Minimum size of name should be 2")
   private String name;
 
   @Past private Date birthDate;
+
+  public User() {}
 
   public Integer getId() {
     return id;
